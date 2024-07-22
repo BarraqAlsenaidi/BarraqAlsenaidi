@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barraq's Website</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>Welcome to Barraq's Photography</h1>
+            <p>Your tagline goes here</p>
+        </div>
+    </header>
+    <section class="services">
+        <h2>Our Services</h2>
+        <div class="service-item">
+            <h3>Service One</h3>
+            <p>Description of service one.</p>
+        </div>
+        <div class="service-item">
+            <h3>Service Two</h3>
+            <p>Description of service two.</p>
+        </div>
+    </section>
+    <section class="clients">
+        <h2>Our Clients</h2>
+        <div class="client-logos">
+            <img src="client1.png" alt="Client 1">
+            <img src="client2.png" alt="Client 2">
+        </div>
+    </section>
+    <section class="contact">
+        <h2>Contact Us</h2>
+        <form>
+            <input type="text" placeholder="Your Name">
+            <input type="email" placeholder="Your Email">
+            <textarea placeholder="Your Message"></textarea>
+            <button type="submit">Send</button>
+        </form>
+    </section>
+</body>
+</html>
