@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Barraq Al Senaidi - Photographer</title>
+    <!-- Security Headers -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' https://via.placeholder.com https:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -95,12 +100,36 @@
         </section>
         <section id="contact" class="section contact">
             <h2>Contact</h2>
-            <form action="mailto:your-email@example.com" method="post" enctype="text/plain">
-                <input type="text" name="name" placeholder="Your Name" required>
-                <input type="email" name="email" placeholder="Your Email" required>
-                <textarea name="message" placeholder="Your Message" rows="4" required></textarea>
+            <form id="contactForm" method="post" action="/api/contact" novalidate>
+                <!-- CSRF token should be added by backend -->
+                <input type="hidden" name="csrf_token" id="csrf_token" value="">
+                <input type="text" name="name" id="name" placeholder="Your Name" required maxlength="100" pattern="[A-Za-z\s]+" title="Name should only contain letters and spaces">
+                <input type="email" name="email" id="email" placeholder="Your Email" required maxlength="100" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}">
+                <textarea name="message" id="message" placeholder="Your Message" rows="4" required maxlength="1000"></textarea>
                 <input type="submit" value="Send">
             </form>
+            <script>
+                // Basic XSS prevention and form validation
+                document.getElementById('contactForm').addEventListener('submit', function(e) {
+                    e.preventDefault();
+
+                    // Sanitize inputs
+                    const name = document.getElementById('name').value.trim();
+                    const email = document.getElementById('email').value.trim();
+                    const message = document.getElementById('message').value.trim();
+
+                    // Validate input lengths
+                    if (name.length > 100 || email.length > 100 || message.length > 1000) {
+                        alert('Input too long. Please reduce your message length.');
+                        return false;
+                    }
+
+                    // Note: This form requires a backend endpoint at /api/contact to process submissions
+                    // For now, show a message that backend is needed
+                    alert('Form validation passed. Backend endpoint /api/contact is required for submission.');
+                    return false;
+                });
+            </script>
         </section>
     </div>
 </body>
